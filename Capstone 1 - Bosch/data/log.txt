@@ -1,0 +1,93 @@
+ (CPU  6.7%)(RAM  9.1%) 15:35:29 Checking for files...
+ (CPU  0.0%)(RAM  9.3%) 15:35:30   Located te_dt_o.pkl
+ (CPU 40.0%)(RAM  9.3%) 15:35:30   Located te_nu_o.pkl
+ (CPU  0.0%)(RAM  9.3%) 15:35:31   Located tr_dt_o.pkl
+ (CPU  0.0%)(RAM  9.2%) 15:35:32   Located tr_nu_o.pkl
+ (CPU  0.0%)(RAM  9.3%) 15:35:33   Located al_nu_o.pkl
+ (CPU  0.0%)(RAM  9.2%) 15:35:35   Located al_dt_o.pkl
+ (CPU  0.0%)(RAM  9.2%) 15:35:36   Located tr_al_o.pkl
+ (CPU  0.0%)(RAM  9.2%) 15:35:37   Located te_al_o.pkl
+ (CPU  7.8%)(RAM  9.2%) 15:35:37 File check complete...
+ (CPU  0.0%)(RAM  9.2%) 15:35:37 Verifying files...
+ (CPU  4.3%)(RAM  9.1%) 15:35:38   Located tr_nu_o.pkl
+ (CPU  9.1%)(RAM  9.1%) 15:35:38   Located te_nu_o.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located tr_dt_o.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located te_dt_o.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located al_nu_o.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located al_dt_o.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located tr_al_o.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located te_al_o.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38 Files verified...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38 Creating features...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Creating train numeric features...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_nu_l
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_nu_s
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_nu_p
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Creating test numeric features...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_nu_l
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_nu_s
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_nu_p
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Creating train date features...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_dt_l
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_dt_s
+ (CPU 44.4%)(RAM  9.1%) 15:35:38     Located tr_dt_p
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Creating test date features...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_dt_l
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_dt_s
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_dt_p
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Combining files...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located al_dt_l.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located al_dt_s.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located al_dt_p.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Creating part distribution...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_dt_rec_ord.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_dt_rec_ord.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Creating part routes...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_routes_l.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_routes_l.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_routes_s.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_routes_s.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located tr_routes_p.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located te_routes_p.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Creating que and wip...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located l_wip.pkl
+ (CPU 33.3%)(RAM  9.1%) 15:35:38     Located s_wip.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located p_wip.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Populating que and wip...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located l_wip_by_id.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located s_wip_by_id.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located p_wip_by_id.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Creating training source files...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located o_final_feats_all.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located l_final_feats_all.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located s_final_feats_all.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Located p_final_feats_all.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38 Feature creation complete
+ (CPU  0.0%)(RAM  9.1%) 15:35:38 Starting feature selection...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located o_final_feats_subset.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located l_final_feats_subset.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located s_final_feats_subset.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located p_final_feats_subset.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located master_final_feats_all.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Located master_final_feats_subset.pkl
+ (CPU  0.0%)(RAM  9.1%) 15:35:38 Completed feature selection...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38 Starting training...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38   Running lgbm final model...
+ (CPU  0.0%)(RAM  9.1%) 15:35:38     Loading data...
+ (CPU  4.2%)(RAM  9.4%) 15:35:53     Initializing training...
+ (CPU  7.4%)(RAM  9.5%) 15:35:56       Splitting data:  X_shape:(1183747, 18)   y_shape:(1183747,)
+ (CPU 24.0%)(RAM 10.1%) 15:35:58       Start training...
+ (CPU 92.3%)(RAM 10.1%) 15:36:14   ************************************************************
+ (CPU  0.0%)(RAM 10.1%) 15:36:14   LGBM Results below are from hold-out test data
+ (CPU  0.0%)(RAM 10.1%) 15:36:14   ************************************************************
+ (CPU  0.0%)(RAM 10.1%) 15:36:14   LGBM Final Results: TN:211,794  FP:43  FN:976  TP:262  Total:213,075
+ (CPU  0.0%)(RAM 10.1%) 15:36:14   LGBM Final MCC: 42.5%
+ (CPU  0.0%)(RAM 10.1%) 15:36:14   ************************************************************
+ (CPU 79.8%)(RAM 10.2%) 15:36:14   ************************************************************
+ (CPU  0.0%)(RAM 10.2%) 15:36:14   LGBM Results below are from hold-out test data
+ (CPU  0.0%)(RAM 10.2%) 15:36:14   ************************************************************
+ (CPU  0.0%)(RAM 10.2%) 15:36:14   LGBM Final Results: TN:117,638  FP:49  FN:510  TP:178  Total:118,375
+ (CPU  0.0%)(RAM 10.2%) 15:36:14   LGBM Final MCC: 44.88%
+ (CPU  0.0%)(RAM 10.2%) 15:36:14   ************************************************************
+ (CPU  0.0%)(RAM 10.2%) 15:36:14   Ending training...
+ (CPU  0.0%)(RAM 10.2%) 15:36:14 ALL COMPLETE
