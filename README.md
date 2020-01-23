@@ -2,7 +2,7 @@
 This repository contains personal projects and work I've completed for the Springboard Data Science Program
 <br/>
 <br/>
-#### Capstone 2 - Futbol
+#### Capstone 2 - Fútbol
 Futbol project...
 <br/>
 <br/>
