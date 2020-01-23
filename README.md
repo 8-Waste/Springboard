@@ -7,7 +7,7 @@ Futbol project...
 <br/>
 <br/>
 #### Capstone 1 - Bosch
-Bosch project...
+This repository contains the code and reports for my Capstone 1 Project, ["Bosch Production Line Performance"](https://www.kaggle.com/c/bosch-production-line-performance) for the Springboard Data Science Career Track program.  The data can be downloaded [here](https://www.kaggle.com/c/bosch-production-line-performance/data).
 <br/>
 <br/>
 #### Projects
