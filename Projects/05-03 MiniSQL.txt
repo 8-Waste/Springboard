@@ -1,0 +1,286 @@
+C:\ProgramData\Anaconda3\python.exe C:/Users/ThomasWiddows/PycharmProjects/MiniSQL/MiniSQL.py
+
+
+Q1: Some of the facilities charge a fee to members, but some do not.
+Please list the names of the facilities that do. 
+
+           name
+ Tennis Court 1
+ Tennis Court 2
+ Massage Room 1
+ Massage Room 2
+   Squash Court 
+
+
+SELECT Facilities.name
+FROM   facilities
+WHERE  membercost > 0 
+
+
+Q2: How many facilities do not charge a fee to members? 
+
+ NoMemberCostforFacilities
+                         4 
+
+
+SELECT Count(facid) AS "NoMemberCostforFacilities"
+FROM   facilities
+WHERE  membercost = 0 
+
+
+Q3: How can you produce a list of facilities that charge a fee to members,
+where the fee is less than 20% of the facility's monthly maintenance cost?
+Return the facid, facility name, member cost, and monthly maintenance of the
+facilities in question. 
+
+ facid             name  membercost  monthlymaintenance
+     0   Tennis Court 1         5.0                 200
+     1   Tennis Court 2         5.0                 200
+     2  Badminton Court         0.0                  50
+     3     Table Tennis         0.0                  10
+     4   Massage Room 1         9.9                3000
+     5   Massage Room 2         9.9                3000
+     6     Squash Court         3.5                  80
+     7    Snooker Table         0.0                  15
+     8       Pool Table         0.0                  15 
+
+
+SELECT facid, name, membercost, monthlymaintenance
+FROM   Facilities
+WHERE  membercost < ( monthlymaintenance * .2 ) 
+
+
+Q4: How can you retrieve the details of facilities with ID 1 and 5?
+Write the query without using the OR operator. 
+
+ facid            name  membercost  guestcost  initialoutlay  monthlymaintenance
+     1  Tennis Court 2         5.0       25.0           8000                 200
+     5  Massage Room 2         9.9       80.0           4000                3000 
+
+
+SELECT *
+FROM   facilities
+WHERE  facid IN( 1, 5 ) 
+
+
+Q5: How can you produce a list of facilities, with each labelled as
+'cheap' or 'expensive', depending on if their monthly maintenance cost is
+more than $100? Return the name and monthly maintenance of the facilities
+in question. 
+
+            NAME  monthlymaintenance      class
+  Tennis Court 1                 200  expensive
+  Tennis Court 2                 200  expensive
+ Badminton Court                  50      cheap
+    Table Tennis                  10      cheap
+  Massage Room 1                3000  expensive
+  Massage Room 2                3000  expensive
+    Squash Court                  80      cheap
+   Snooker Table                  15      cheap
+      Pool Table                  15      cheap 
+
+
+SELECT NAME,
+       monthlymaintenance,
+       CASE
+         WHEN monthlymaintenance < 100 THEN 'cheap'
+         WHEN monthlymaintenance > 100 THEN 'expensive'
+       END AS 'class'
+FROM   facilities 
+
+
+Q6: You'd like to get the first and last name of the last member(s)
+who signed up. Do not use the LIMIT clause for your solution. 
+
+firstname surname
+   Darren   Smith 
+
+
+SELECT firstname,
+       surname
+FROM   members
+WHERE  joindate = (SELECT Max(joindate)
+                   FROM   members) 
+
+
+Q7: How can you produce a list of all members who have used a tennis court?
+Include in your output the name of the court, and the name of the member
+formatted as a single column. Ensure no duplicate data, and order by
+the member name. 
+
+     court_name              m_name
+ Tennis Court 1     Bader, Florence
+ Tennis Court 2     Bader, Florence
+ Tennis Court 1         Baker, Anne
+ Tennis Court 2         Baker, Anne
+ Tennis Court 1      Baker, Timothy
+ Tennis Court 2      Baker, Timothy
+ Tennis Court 1         Boothe, Tim
+ Tennis Court 2         Boothe, Tim
+ Tennis Court 1     Butters, Gerald
+ Tennis Court 2     Butters, Gerald
+ Tennis Court 1        Coplin, Joan
+ Tennis Court 1      Crumpet, Erica
+ Tennis Court 1         Dare, Nancy
+ Tennis Court 2         Dare, Nancy
+ Tennis Court 1      Farrell, David
+ Tennis Court 2      Farrell, David
+ Tennis Court 1     Farrell, Jemima
+ Tennis Court 2     Farrell, Jemima
+ Tennis Court 1    Genting, Matthew
+ Tennis Court 1          Hunt, John
+ Tennis Court 2          Hunt, John
+ Tennis Court 1        Jones, David
+ Tennis Court 2        Jones, David
+ Tennis Court 1      Jones, Douglas
+ Tennis Court 1    Joplette, Janice
+ Tennis Court 2    Joplette, Janice
+ Tennis Court 1       Owen, Charles
+ Tennis Court 2       Owen, Charles
+ Tennis Court 1       Pinker, David
+ Tennis Court 2  Purview, Millicent
+ Tennis Court 1         Rownam, Tim
+ Tennis Court 2         Rownam, Tim
+ Tennis Court 2   Rumney, Henrietta
+ Tennis Court 1   Sarwin, Ramnaresh
+ Tennis Court 2   Sarwin, Ramnaresh
+ Tennis Court 2       Smith, Darren
+ Tennis Court 1         Smith, Jack
+ Tennis Court 2         Smith, Jack
+ Tennis Court 1        Smith, Tracy
+ Tennis Court 2        Smith, Tracy
+ Tennis Court 1    Stibbons, Ponder
+ Tennis Court 2    Stibbons, Ponder
+ Tennis Court 1       Tracy, Burton
+ Tennis Court 2       Tracy, Burton 
+
+
+SELECT DISTINCT Facilities.name AS court_name,
+                surname + ', ' + firstname AS m_name
+FROM   bookings
+       INNER JOIN facilities
+               ON bookings.facid = facilities.facid
+       INNER JOIN members
+               ON bookings.memid = members.memid
+WHERE  facilities.NAME LIKE ( 'Tennis Court%' )
+       AND members.memid <> 0
+ORDER  BY surname + ', ' + firstname 
+
+
+Q8: How can you produce a list of bookings on the day of 2012-09-14 which
+will cost the member (or guest) more than $30? Remember that guests have
+different costs to members (the listed costs are per half-hour 'slot'), and
+the guest user's ID is always 0. Include in your output the name of the
+facility, the name of the member formatted as a single column, and the cost.
+Order by descending cost, and do not use any subqueries. 
+
+           name           m_name   Cost
+ Massage Room 2            GUEST  320.0
+ Massage Room 1            GUEST  160.0
+ Massage Room 1            GUEST  160.0
+ Massage Room 1            GUEST  160.0
+ Tennis Court 2            GUEST  150.0
+ Tennis Court 1            GUEST   75.0
+ Tennis Court 1            GUEST   75.0
+ Tennis Court 2            GUEST   75.0
+   Squash Court            GUEST   70.0
+ Massage Room 1  Farrell, Jemima   39.6
+   Squash Court            GUEST   35.0
+   Squash Court            GUEST   35.0 
+
+
+SELECT facilities.name,
+       CASE
+         WHEN members.memid <> 0 THEN surname + ', ' + firstname
+         WHEN members.memid = 0 THEN surname
+       END AS m_name,
+       CASE
+         WHEN bookings.memid <> 0 THEN slots * membercost
+         WHEN bookings.memid = 0 THEN slots * guestcost
+       END AS 'Cost'
+FROM   bookings
+       INNER JOIN facilities
+               ON bookings.facid = facilities.facid
+       INNER JOIN members
+               ON bookings.memid = members.memid
+WHERE  ( starttime >= '2012-09-14 08:00:00.0000000'
+         AND starttime < '2012-09-15 08:00:00.0000000' )
+       AND CASE
+             WHEN bookings.memid <> 0 THEN slots * membercost
+             WHEN bookings.memid = 0 THEN slots * guestcost
+           END > 30
+ORDER  BY cost DESC 
+
+
+Q9: This time, produce the same result as in Q8, but using a subquery. 
+
+           name           m_name   Cost
+ Massage Room 2            GUEST  320.0
+ Massage Room 1            GUEST  160.0
+ Massage Room 1            GUEST  160.0
+ Massage Room 1            GUEST  160.0
+ Tennis Court 2            GUEST  150.0
+ Tennis Court 1            GUEST   75.0
+ Tennis Court 1            GUEST   75.0
+ Tennis Court 2            GUEST   75.0
+   Squash Court            GUEST   70.0
+ Massage Room 1  Farrell, Jemima   39.6
+   Squash Court            GUEST   35.0
+   Squash Court            GUEST   35.0 
+
+
+SELECT facilities.name,
+       CASE
+         WHEN members.memid <> 0 THEN surname + ', ' + firstname
+         WHEN members.memid = 0 THEN surname
+       END AS m_name,
+       CASE
+         WHEN bookings2.memid <> 0 THEN slots * membercost
+         WHEN bookings2.memid = 0 THEN slots * guestcost
+       END AS 'Cost'
+FROM   (SELECT facid,
+               memid,
+               slots
+        FROM   bookings
+        WHERE  ( starttime >= '2012-09-14 08:00:00.0000000'
+                 AND starttime < '2012-09-15 08:00:00.0000000' )) AS bookings2
+       INNER JOIN facilities
+               ON bookings2.facid = facilities.facid
+       INNER JOIN members
+               ON bookings2.memid = members.memid
+WHERE  CASE
+         WHEN bookings2.memid <> 0 THEN slots * membercost
+         WHEN bookings2.memid = 0 THEN slots * guestcost
+       END > 30
+ORDER  BY cost DESC 
+
+
+Q10: Produce a list of facilities with a total revenue less than 1000.
+The output of facility name and total revenue, sorted by revenue. Remember
+that there's a different cost for guests and members! 
+
+ Facility Name  Revenue
+    Pool Table    270.0
+ Snooker Table    240.0
+  Table Tennis    180.0 
+
+
+SELECT temp.name AS 'Facility Name',
+       Round(Sum(cost), 0) AS 'Revenue'
+FROM   (SELECT facilities.name,
+               CASE
+                 WHEN bookings.memid <> 0 THEN slots * membercost
+                 WHEN bookings.memid = 0 THEN slots * guestcost
+               END AS 'Cost'
+        FROM   bookings
+               INNER JOIN facilities
+                       ON bookings.facid = facilities.facid
+               INNER JOIN members
+                       ON bookings.memid = members.memid) AS temp
+GROUP  BY temp.name
+HAVING Sum(cost) < 1000
+ORDER  BY revenue DESC 
+
+
+
+Process finished with exit code 0
