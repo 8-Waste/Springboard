@@ -2,8 +2,8 @@
 This repository contains personal projects and work I've completed for the Springboard Data Science Program
 <br/>
 <br/>
-#### Capstone 2 - Fútbol
-Futbol project...
+#### Capstone 2 - Fútbol Match Highlights
+This repository contains the code and reports for my Capstone 2 Project, Fútbol Match Highlights for the Springboard Data Science Career Track program. 
 <br/>
 <br/>
 #### Capstone 1 - Bosch
