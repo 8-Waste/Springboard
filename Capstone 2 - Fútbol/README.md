@@ -11,7 +11,7 @@ College coaches require soccer players to submit highlight video and game film t
 * Processing the video is time consuming
 * The required hardware and software are expensive.
 
-My Capstone 2 project will focus on identifying a targeted player using facial recognition. I will initially focus on identifying the target player in photos and post project transition to video and teammates.
+My Capstone 2 project focuses on identifying a targeted player using facial recognition. I will initially focus on identifying the target player in photos and post project transition to video and teammates.
 
 ## The dataset
 The dataset is self generated from high school soccer matches.  I used one dataset 
@@ -28,8 +28,7 @@ to supplement my Faces vs Objects (non-faces) model.  The dataset can be downlao
 * **data/03_unknown_faces:** Contains photos of faces of anyone except the target player.
 * **data/04_found_faces:** Contains photos of recognized images of the target player found in the 01_source_photos.
 
-**code:** Contains the code used for this project excluding Jupyter Notebooks which are located in reports.  The .py files in this directory support Jupyter Notebook via importing.  The allows the Jupyter Notebook to be more more readable.
-* **code/mtcnn:** Contains MTCNN detector code.
+**code:** Contains the code used for this project excluding Jupyter Notebooks which are located in reports.  The .py files in this directory support Jupyter Notebooks via importing.  The allows the Jupyter Notebook to be more more readable.
 
 **reports:** Contains all reports, graphs, and slides for this project.
 * **reports/intermediary reports/images:** Contains images used for Jupyter Notebooks and reports
