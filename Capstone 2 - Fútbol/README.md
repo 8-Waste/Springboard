@@ -9,15 +9,19 @@ Avoiding problems is generally preferable to dealing with their consequences.  
 The dataset represents measurements from 2,367,495 products (rows) as they move through Bosch’s production line.  There are 968 numerical features and 1,156 date features (columns).  The dataset can be downloaded  [here](https://www.kaggle.com/c/bosch-production-line-performance/data). 
 
 ## Folder content
-**root:** The DataStory jupyter notebook.
+**root:** The DataStory.
 
-**data:** The data for this project exceeds 14GB and can be downloaded [here](https://www.kaggle.com/c/bosch-production-line-performance/data). 
-* **data/special:** Contains support files for the DataStory jupyter notebook.  The notebook will not execute completely without downloading the data.
+**data:** Contains all the data for this project.
+* **data/00_support:** Contains face_vs_object dataset, focused_vs_unfocused_dataset and all models.
+* **data/00_support:** Contains face_vs_object dataset, focused_vs_unfocused_dataset and all models.
+* **data/01_source_photos:** Contains photos of players on the pitch.
+* **data/02_target_faces:** Contains photos of target player (player's face to locate).
+* **data/03_unknown_faces:** Contains photos of faces of anyone except the target player.
+* **data/04_found_faces:** Contains photos of recognized images of the target player found in the 01_source_photos.
 
-**code:** Contains the code used for this project.
-* **code/luigi_code:** Contains the code for execution by luigi
-* **code/luigi_status:** Contains luigi status files
+**code:** Contains the code used for this project excluding Jupyter Notebooks which are located in reports.  The .py files in this directory support Jupyter Notebook via importing.  The allows the Jupyter Notebook to be more more readable.
+* **code/mtcnn:** Contains MTCNN detector code.
 
 **reports:** Contains all reports, graphs, and slides for this project.
-* **reports/img:** Contains images (.jpg, .png) used for the DataStory jupyter notebook
+* **reports/intermediary reports/images:** Contains images used for Jupyter Notebooks and reports
 * **reports/intermediary reports:** Contains additional reports regarding project
