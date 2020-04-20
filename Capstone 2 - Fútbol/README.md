@@ -1,5 +1,5 @@
 ﻿# capstone_2_project
-This repository contains the code and reports for my Capstone 1 Project, **Fútbol Match Highlights** for the Springboard Data Science Career Track program.  
+This repository contains the code and reports for my Capstone 2 Project, **Fútbol Match Highlights** for the Springboard Data Science Career Track program.  
 
 ## About the project
 > “It is not just about the money, it is about what you achieve on the pitch. “ Ronaldinho
@@ -11,11 +11,11 @@ College coaches require soccer players to submit highlight video and game film t
 * Processing the video is time consuming
 * The required hardware and software are expensive.
 
-My Capstone 2 project will focus on identifying a targeted player using facial recognition. I will initially focus on identifying the target player in photos and post project transition to video and including teammates.
+My Capstone 2 project will focus on identifying a targeted player using facial recognition. I will initially focus on identifying the target player in photos and post project transition to video and teammates.
 
 ## The dataset
-The dataset is self generated from high school soccer matches.  I used one dataset from 
-to supplement my Faces vs Objects (non-faces).  The dataset can be downlaoded [here](http://www.vision.caltech.edu/pmoreels/Datasets/Home_Objects_06/).
+The dataset is self generated from high school soccer matches.  I used one dataset 
+to supplement my Faces vs Objects (non-faces) model.  The dataset can be downlaoded [here](http://www.vision.caltech.edu/pmoreels/Datasets/Home_Objects_06/).
 
 ## Folder content
 **root:** The DataStory.
