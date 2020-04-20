@@ -1,5 +1,5 @@
-﻿# capstone_1_project
-This repository contains the code and reports for my Capstone 1 Project, Fútbol Match Highlights for the Springboard Data Science Career Track program.  
+﻿# capstone_2_project
+This repository contains the code and reports for my Capstone 1 Project, **Fútbol Match Highlights** for the Springboard Data Science Career Track program.  
 
 ## About the project
 > “It is not just about the money, it is about what you achieve on the pitch. “ Ronaldinho
