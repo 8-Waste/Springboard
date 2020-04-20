@@ -17,6 +17,9 @@ My Capstone 2 project focuses on identifying a targeted player using facial reco
 The dataset is self generated from high school soccer matches.  I used one dataset 
 to supplement my Faces vs Objects (non-faces) model.  The dataset can be downlaoded [here](http://www.vision.caltech.edu/pmoreels/Datasets/Home_Objects_06/).
 
+## Process overview
+![](reports/intermediary%20reports/images/Full_Overview.png)
+
 ## Folder content
 **root:** The DataStory.
 
