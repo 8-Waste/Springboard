@@ -18,7 +18,7 @@ The dataset is self generated from high school soccer matches.  I used one datas
 to supplement my Faces vs Objects (non-faces) model.  The dataset can be downlaoded [here](http://www.vision.caltech.edu/pmoreels/Datasets/Home_Objects_06/).
 
 ## Process overview
-![](reports/intermediary\ reports/images/Full_Overview.png)
+![](reports/intermediary_reports/images/Full_Overview.png)
 
 ## Folder content
 **root:** The DataStory.
