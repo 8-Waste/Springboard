@@ -1,12 +1,21 @@
 ﻿# capstone_1_project
-This repository contains the code and reports for my Capstone 1 Project, ["Bosch Production Line Performance"](https://www.kaggle.com/c/bosch-production-line-performance) for the Springboard Data Science Career Track program.  The data can be downloaded [here](https://www.kaggle.com/c/bosch-production-line-performance/data).
+This repository contains the code and reports for my Capstone 1 Project, Fútbol Match Highlights for the Springboard Data Science Career Track program.  
 
 ## About the project
-> “An ounce of prevention is worth a pound of cure. “ Benjamin Franklin (1736)
+> “It is not just about the money, it is about what you achieve on the pitch. “ Ronaldinho
  
-Avoiding problems is generally preferable to dealing with their consequences.  Although this concept is usually associated with healthcare, it can also be applied to manufacturing.  Producing defective products (the problems) increases costs, decreases profit, and can cause a customer to reevaluate purchasing your product (the consequences).  Bosch, one of the world’s leading manufacturing companies, has an imperative to reduce defects while ensuring their products are of the highest quality standards.  This project utilizes advanced machine learning techniques combined with Bosch’s detailed manufacturing records to identify defective products.  Bosch will utilize the results to identify the root cause of the defects and implement appropriate corrections.
+College coaches require soccer players to submit highlight video and game film to be considered for an athletic scholarship. The issues facing the student-athlete are:
+* Recording and processing video is time-consuming
+* The athlete is playing so they must rely on others to take the video
+* People would rather watch the game instead of being a videographer
+* Processing the video is time consuming
+* The required hardware and software are expensive.
+
+My Capstone 2 project will focus on identifying a targeted player using facial recognition. I will initially focus on identifying the target player in photos and post project transition to video and including teammates.
+
 ## The dataset
-The dataset represents measurements from 2,367,495 products (rows) as they move through Bosch’s production line.  There are 968 numerical features and 1,156 date features (columns).  The dataset can be downloaded  [here](https://www.kaggle.com/c/bosch-production-line-performance/data). 
+The dataset is self generated from high school soccer matches.  I used one dataset from 
+to supplement my Faces vs Objects (non-faces).  The dataset can be downlaoded [here](http://www.vision.caltech.edu/pmoreels/Datasets/Home_Objects_06/).
 
 ## Folder content
 **root:** The DataStory.
