@@ -25,7 +25,6 @@ to supplement my Faces vs Objects (non-faces) model.  The dataset can be downlao
 
 **data:** Contains all the data for this project.
 * **data/00_support:** Contains face_vs_object dataset, focused_vs_unfocused_dataset and all models.
-* **data/00_support:** Contains face_vs_object dataset, focused_vs_unfocused_dataset and all models.
 * **data/01_source_photos:** Contains photos of players on the pitch.
 * **data/02_target_faces:** Contains photos of target player (player's face to locate).
 * **data/03_unknown_faces:** Contains photos of faces of anyone except the target player.
