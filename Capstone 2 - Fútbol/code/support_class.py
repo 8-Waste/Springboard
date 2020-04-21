@@ -7,14 +7,16 @@ from functools import partial
 from imblearn.over_sampling import SMOTE
 import lightgbm as lgb
 from matplotlib import transforms
-import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 from matplotlib.lines import Line2D
 import matplotlib.patheffects as path_effects
+import matplotlib.pyplot as plt
 from matplotlib.ticker import PercentFormatter, StrMethodFormatter
 import numpy as np
 from pathlib import Path
 import pandas as pd
 import pickle
+import rawpy
 import seaborn as sns
 from skimage.filters import laplace, sobel, roberts
 from sklearn.preprocessing import binarize
@@ -47,21 +49,33 @@ class Fball:
 
     # save model
     @staticmethod
-    def save_model(model_obj, name):
-        with open(s.MODELS_jn / str(name + '.pkl'), 'wb') as f:
-            pickle.dump(model_obj, f, pickle.HIGHEST_PROTOCOL)
+    def save_model(model_obj, name, ir=True):
+        if ir:
+            with open(s.MODELS_jn / str(name + '.pkl'), 'wb') as f:
+                pickle.dump(model_obj, f, pickle.HIGHEST_PROTOCOL)
+        else:
+            with open(s.MODELS / str(name + '.pkl'), 'wb') as f:
+                pickle.dump(model_obj, f, pickle.HIGHEST_PROTOCOL)
+
 
     # load model
     @staticmethod
-    def load_model(name):
-        with open(s.MODELS_jn / str(name + '.pkl'), 'rb') as f:
-            return pickle.load(f)
+    def load_model(name, ir=True):
+        if ir:
+            with open(s.MODELS_jn / str(name + '.pkl'), 'rb') as f:
+                return pickle.load(f)
+        else:
+            with open(s.MODELS / str(name + '.pkl'), 'rb') as f:
+                return pickle.load(f)
 
 
     @staticmethod
-    def checkfile(file):
+    def checkfile(file, ir=True):
         num = 0
-        file = s.REPORT_IMAGES_jn / file
+        if ir:
+            file = s.REPORT_IMAGES_jn / file
+        else:
+            file = s.REPORT_IMAGES / file
         file_stem = file.stem
         while file.exists() or num == 0:
             num += 1
@@ -180,43 +194,6 @@ class Fball:
         plt.xlim(-1, n_features)
         plt.xticks(range(n_features), top_names, rotation="vertical")
 
-    # # draw diag line
-    # def abline(slope, intercept):
-    #     """Plot a line from slope and intercept"""
-    #     axes = plt.gca()
-    #     x_vals = np.array(axes.get_xlim())
-    #     y_vals = intercept + slope * x_vals
-    #     plt.plot(x_vals, y_vals, '--')
-
-    # # plot roc curve
-    # def plot_roc_curve(y_valid, y_pred_prob):
-    #     fpr, tpr, thresholds = roc_curve(y_valid, y_pred_prob.ravel())
-    #     optimal_cutoff = cutoff_youdens_j(fpr, tpr, thresholds)
-    #     y_pred_class = binarize(y_pred_prob.reshape(1, -1), optimal_cutoff)
-    #     tn, fp, fn, tp = confusion_matrix(y_valid, y_pred_class.ravel()).ravel()
-    #     false_positive_rate = fp / (fp + tn)
-    #     true_positive_rate = tp / (tp + fn)
-    #
-    #     fig, ax = plt.subplots(figsize=(5, 5))
-    #     plt.plot(fpr, tpr)
-    #     plt.xlim([0.0, 1.0])
-    #     plt.ylim([0.0, 1.0])
-    #     plt.gca().set_aspect('equal', adjustable='box')
-    #     ax = plt.gca()
-    #     ax.xaxis.set_major_formatter(PercentFormatter(1))
-    #     ax.yaxis.set_major_formatter(PercentFormatter(1))
-    #     plt.xticks(fontsize=12, rotation=0)
-    #     plt.yticks(fontsize=12, rotation=0)
-    #     plt.title('ROC curve\n', fontsize=16)
-    #     plt.xlabel('False Positive Rate\nFP / (FP + TN)', fontsize=14)  # : (1 - Specificity)
-    #     plt.ylabel('True Positive Rate (Recall)\nTP / (TP + FN)', fontsize=14)  # : (Recall)
-    #     plt.grid(True)
-    #     abline(slope=1, intercept=0)
-    #     ax.axvline(x=false_positive_rate, ymin=0, ymax=true_positive_rate, color='r', linestyle='--')
-    #     ax.axhline(y=true_positive_rate, xmin=0, xmax=false_positive_rate, color='r', linestyle='--')
-    #     plt.tight_layout()
-    #     fig.savefig('images/ROC_Curve')
-    #     return optimal_cutoff
 
     # plot confusion matrix plus
     @staticmethod
@@ -581,6 +558,175 @@ class Fball:
             return X, y
 
 
+# No longer used but left in for "02 - Data Wrangling" and "03 - Data Storytelling" support
+    @staticmethod
+    def show_images(path, feat, pcts):
+        # import cv2
+        # import matplotlib.pyplot as plt
+        # from skimage.filters import laplace, sobel, roberts
+        def get_crop(img, pct):
+            x = int(img.shape[0] * ((1 - pct) / 2))
+            h = int(img.shape[0] * pct)
+            y = int(img.shape[1] * ((1 - pct) / 2))
+            w = int(img.shape[1] * pct)
+            img = img[x:x + h, y:y + w]
+            return img
+
+        for pct in pcts:
+            plt.figure(figsize=(10, 10))
+            x_label = ['Sharp', 'Defocused Blur', 'Motion Blur']
+            for i in range(len(path)):
+                if feat == None:
+                    img = cv2.imread(str(path[i]))  # read image in BGR
+                    img = get_crop(img, pct)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                else:
+                    img = cv2.imread(str(path[i]), 0)  # read gray scale image
+                    img = get_crop(img, pct)
+
+                if feat == 'laplace':
+                    img = laplace(img)
+                elif feat == 'sobel':
+                    img = sobel(img)
+                elif feat == 'roberts':
+                    img = roberts(img)
+                elif feat == 'canny':
+                    img = cv2.Canny(img, 100, 200, 3, L2gradient=True)
+                elif feat == None:
+                    pass
+                else:
+                    raise ValueError('Feature must be None, laplace, sobel or roberts')
+
+                plt.subplot(1, 3, i + 1)
+                plt.imshow(img, cmap='gray')
+                plt.xticks([])
+                plt.yticks([])
+                xlabel_temp = f'{x_label[i]} ({pct:.0%} crop)'
+                # plt.xlabel(x_label[i]+' '+str(pct))
+                plt.xlabel(xlabel_temp)
+
+            plt.tight_layout()
+            plt.show()
+        # print(img.shape)
+
+    @staticmethod
+    def show_5x5_images(rows, columns, title, style='default', plot='rgb', linef=True):
+        if linef:
+            print('')
+        plt.style.use(style)
+        color_dict = Fball.get_plot_data()
+        fig, axs = plt.subplots(rows, columns, figsize=(18, 6 * rows))  # figsize=(w,h)
+
+        for i, ax in enumerate(axs.flatten()):
+            Fball.plot_heatmap(color_dict, plot[i], ax, title[i])
+        plt.tight_layout()
+        fig.subplots_adjust(wspace=.15)
+        return
+
+    @staticmethod
+    def get_plot_data():
+        np.random.seed(1)
+        r = np.random.choice((0, 1), size=(5, 5))  # 1
+        g = np.random.choice((0, 2), size=(5, 5))  # 2
+        b = np.random.choice((0, 4), size=(5, 5))  # 4
+        y = np.add(r, g)  # 3
+        m = np.add(r, b)  # 5
+        c = np.add(g, b)  # 6
+        w = np.add(y, b)  # 7
+        color_dict = {'r': r, 'g': g, 'b': b, 'y': y, 'm': m, 'c': c, 'w': w}
+        return color_dict
+
+    @staticmethod
+    def plot_heatmap(color_dict, clr, ax, title):
+        ax = ax
+        data = color_dict[clr]
+        title_font_size = 20
+        ticklabel_font_size = 12
+
+        ax.set_title(title, fontdict={'fontsize': title_font_size})
+
+        label_text = {0: {'lbl': f'R G B\n0,0,0', 'cmap': 'black'},  # black
+                      1: {'lbl': f'R G B\n255,0,0', 'cmap': 'red'},  # red
+                      2: {'lbl': f'R G B\n0,255,0', 'cmap': 'green'},  # green
+                      3: {'lbl': f'R G B\n255,255,0', 'cmap': 'yellow'},  # yellow
+                      4: {'lbl': f'R G B\n0,0,255', 'cmap': 'blue'},  # blue
+                      5: {'lbl': f'R G B\n255,0,255', 'cmap': 'magenta'},  # magenta
+                      6: {'lbl': f'R G B\n0,255,255', 'cmap': 'cyan'},  # cyan
+                      7: {'lbl': f'R G B\n255,255,255', 'cmap': 'white'}}  # white
+
+        cmap = sorted(list(set([i for i in sorted(data.flatten())])))  # gives us a list  of all unique values for colors
+        cmap = [label_text[x]['cmap'] for x in cmap]  # create an list containing colors for color map
+        labels = np.array([label_text[i]['lbl'] for i in data.flatten()]).reshape(5,
+                                                                                  5)  # create array with labels (RGB value) for each datapoint
+        bins = sorted(list(set([i for i in sorted(data.flatten())])))  # create bins so matplot lib uses the correct colors
+        data = np.digitize(data.flatten(), bins, right=True).reshape(5,
+                                                                     5)  # rename the data to start with 0 and end with the number of unique elements
+        sns.heatmap(data, ax=ax, annot=labels, linewidths=.5, square=True, cbar=False,
+                    annot_kws={"fontsize": 10, "color": 'White', 'weight': 'bold'}, fmt='', cmap=ListedColormap(cmap));
+        bottom, top = ax.get_ylim()
+        ax.set_ylim(bottom + 0.5, top - 0.5)  # fixes 1/2 squares at top and bottom, seaborn - matplotlib bug
+        for ticklabel in (ax.get_xticklabels()):  # correct font for x labels
+            ticklabel.set_fontsize(ticklabel_font_size)
+        for ticklabel in (ax.get_yticklabels()):  # correct font for y labels
+            ticklabel.set_fontsize(ticklabel_font_size)
+        for i, val in enumerate(color_dict[clr].flatten()):  # change white text for certain color backgrounds
+            if val in [3, 5, 6, 7, ]:  # yellow, magenta, cyan and white
+                ax.texts[i].set_color('Black')
+        return ax
+
+    def ds_read_image(file, resize_img=True):
+        import PIL
+        if file.suffix.lower() == '.cr2':
+            with rawpy.imread(str(file)) as raw:
+                image = raw.postprocess()
+                # image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+            file = Path(file.with_suffix('.tiff'))
+        elif file.suffix.lower() in ['.jpg', 'jpeg']:
+            image = cv2.imread(str(file))
+        elif file.suffix.lower() in ['.tiff', '.tif']:
+            image = cv2.imread(str(file))
+
+        else:
+            image = None
+            print('file type not found: ' + str(file.suffix))
+            return False, image, 0
+        pct_resize = 1
+        if resize_img:
+            image, pct_resize = Fball.ds_image_resize(image, height=1350)
+        return True, image, pct_resize
+
+    def ds_image_resize(image, width=None, height=None, inter=cv2.INTER_AREA):
+        # initialize the dimensions of the image to be resized and
+        # grab the image size
+        dim = None
+        (h, w) = image.shape[:2]
+
+        # if both the width and height are None, then return the
+        # original image
+        if width is None and height is None:
+            return image
+
+        # check to see if the width is None
+        if width is None:
+            # calculate the ratio of the height and construct the
+            # dimensions
+            r = height / float(h)
+            dim = (int(w * r), height)
+
+        # otherwise, the height is None
+        else:
+            # calculate the ratio of the width and construct the
+            # dimensions
+            r = width / float(w)
+            dim = (width, int(h * r))
+
+        # resize the image
+        resized = cv2.resize(image, dim, interpolation=inter)
+
+        # return the resized image and the ratio used
+        return resized, r
+
+
 # face aligner
 class FaceAligner:
     def __init__(self, desired_left_eye=(0.35, 0.35),
@@ -627,3 +773,4 @@ class FaceAligner:
         output = cv2.warpAffine(image, M, (w, h), flags=cv2.INTER_CUBIC)
         # return the aligned face
         return output
+
